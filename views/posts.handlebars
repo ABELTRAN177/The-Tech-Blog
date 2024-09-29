@@ -18,13 +18,30 @@
     </div>
 
     <div class="card-body">
-        {{#each post.comments}}
-        <div>
-            <p>{{this.body}}</p>
-            <p>&mdash; {{this.user.username}}, {{formatDate this.createdAt}}</p>
-        </div>
+        {{#each post.comments as |comment|}}
+        {{> comments}}
         {{/each}}
+        <div>
+</section>
+{{/if}}
 
-    <div class="card-footer">
-        <p>Posted by {{post.user.username}} on {{formatDate post.createdAt}}</p>
+<form id="commentForm" class="card">
+    <div class="card-header">
+        <h2>Add a Comment</h2>
     </div>
+
+    <div class="card-body">
+        <input type="hidden" name="postId" value="{{post.id}}"/>
+        <label class="form-label" for="commentBody">Comment:</label>
+        <textarea id="commentBody" class="form-input"></textarea>
+        <button type="submit" id="Button" class="btn">Submit</button>
+    </div>
+</form>
+</div>
+
+
+
+
+
+
+    <script src="/Develop/public/js/comment.js"></script>
