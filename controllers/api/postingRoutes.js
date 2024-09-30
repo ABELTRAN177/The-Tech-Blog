@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { Posting } = require('../../models');
-const { apiGuard } = require('../../utils/auth');
+const { Posting } = require('../../model');
+const { apiGuard } = require('../../utils/authGuard');
 
 router.post('/', apiGuard, async (req, res) => {
     const body = req.body;

@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { Posting } = require('../../models');
-const { withGuard } = require('../../utils/auth');
+const { Posting } = require('../model');
+const { withGuard } = require('../utils/authGuard');
 
 router.get('/', withGuard, async (req, res) => {
     try {
@@ -12,14 +12,14 @@ router.get('/', withGuard, async (req, res) => {
 
         const posts = postingData.map((post) => post.get({ plain: true }));
 
-        res.render('profile', { posts, loggedIn: req.session.logged_in });
+        res.render('profile', { profile: true, posts,  loggedIn: req.session.logged_in });
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
 router.get('/new', withGuard, (req, res) => {
-    res.render('newposting', { dashboard: true, loggedIn: req.session.logged_in });
+    res.render('newposting', { profile: true, loggedIn: req.session.logged_in });
 });
 
 router.get('/edit/:id', withGuard, async (req, res) => {
@@ -29,7 +29,7 @@ router.get('/edit/:id', withGuard, async (req, res) => {
         if (postingData) {
             const post = postingData.get({ plain: true });
 
-            res.render('editposting', { post, dashboard: true, loggedIn: req.session.logged_in });
+            res.render('editposting', { profile: true, posts, loggedIn: req.session.logged_in });
         } else {
             res.status(404).end();
         }

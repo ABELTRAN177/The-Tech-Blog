@@ -1,17 +1,14 @@
 const router = require('express').Router();
-const { Posting, Comments, User  } = require('../../models');
-const { apiGuard, withoutGuard } = require('../../utils/auth');
+const Posting = require('../model/Posts');
+const Comments = require('../model/Comments');
+const User = require('../model/Users');
+const { withGuard, withoutGuard } = require('../utils/authGuard');
 
 
-router.get('/', withoutGuard, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const postingData = await Posting.findAll({
-            include: [
-                {
-                    model: User,
-                    attributes: ['username'],
-                },
-            ],
+            include: [User],
 });
 
 const posts = postingData.map((post) => post.get({ plain: true }));    
@@ -26,9 +23,10 @@ router.get('/posting/:id', withoutGuard, async (req, res) => {
     try {
         const postingData = await Posting.findByPk(req.params.id, {
             include: [
+                User,
                 {
-                    model: User,
-                    attributes: ['username'],
+                    model: Comments,
+                    include: ['User'],
                 },
             ],
         });
@@ -36,7 +34,7 @@ router.get('/posting/:id', withoutGuard, async (req, res) => {
        if (postingData) { 
         const post = postingData.get({ plain: true });
 
-        res.render('posting', { post, loggedIn: req.session.logged_in });
+        res.render('posting', { posting, loggedIn: req.session.logged_in });
     } else {
         res.status(404).end();
     }
