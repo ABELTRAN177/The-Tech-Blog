@@ -43,4 +43,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 
-app.listen(PORT, () => {console.log(`API server now on port http://localhost:PORT`);});
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+});
