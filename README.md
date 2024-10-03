@@ -1,4 +1,5 @@
 # The Tech Blog [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<img width="1800" alt="Screenshot 2024-10-03 at 2 12 20 PM" src="https://github.com/user-attachments/assets/41b056c2-c079-4b01-8ea0-c19fca329633">
 
 
   ## Description
@@ -22,7 +23,7 @@
     Manny/ Angel Beltran 
   
   ## Testing
-    run node or node server.js in the terminal/integrated terminal 
+    node server.js in the terminal/integrated terminal 
 
   ## Render
    https://the-tech-blog-ddzn.onrender.com
