@@ -1,9 +1,8 @@
-<div class="post card">
-    {{#each posts}}
-    <a class="list-item flex-row justify-content-between" href="/posts/{{this.id}}">
-        <span>{{this.title}}</span>
-        <span>{{formatDate createAt}}</span>
-    </a>
-    {{/each}}
-
+<div class="posts list-group">
+  {{#each posts}}
+  <a class="list-item flex-row justify-space-between" href="/dashboard/edit/{{id}}">
+    <span>{{title}}</span>
+    <span>{{formatDate createdAt}}</span>
+  </a>
+  {{/each}}
 </div>
